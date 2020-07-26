@@ -1,0 +1,10 @@
+<div *ngIf="hero">
+    <div><img src="{{hero.imgLink}}" width="100px" height="100px"></div>
+    <div>{{hero.name}}</div>
+    <div>Atak:<input type="number" [(ngModel)]="hero.maxAttackStat"></div>
+    <div>Obrona:<input type="number" [(ngModel)]="hero.defStat"></div>
+    <div>HP: {{hero.hpStat}}/<input type="number" [(ngModel)]="hero.maxHp">
+        <!-- <mat-progress-bar mode="determinate" [value]="hpBar"></mat-progress-bar></div> -->
+    <div>Szansa na specjalny atak: </div>
+    <div> <input type="number" [(ngModel)]="hero.specialAttackChance"></div>
+</div>

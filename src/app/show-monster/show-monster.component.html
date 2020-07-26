@@ -1,0 +1,11 @@
+<p>show-monster works!</p>
+<div *ngIf="monster">
+    <div><img src="{{monster[0].imgLink}}" width="100px" height="100px"></div>
+    <div>{{monster[0].name}}</div>
+    <div>Atak:<input type="number" [(ngModel)]="monster[0].maxAttackStat"></div>
+    <div>Obrona:<input type="number" [(ngModel)]="monster[0].defStat"></div>
+    <div>HP: {{monster[0].hpStat}}/<input type="number" [(ngModel)]="monster[0].maxHp">
+        <!-- <mat-progress-bar mode="determinate" [value]="hpBar"></mat-progress-bar></div> -->
+    <div>Szansa na specjalny atak: </div>
+    <div> <input type="number" [(ngModel)]="monster[0].specialAttackChance"></div>
+</div>

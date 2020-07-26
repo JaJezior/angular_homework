@@ -1,0 +1,5 @@
+<p>show-gamelog works!</p>
+<button type="button" [disabled]="gameStarted" (click)="gameStart(); gameStarted = true">Rozpocznij walkę</button>
+<div *ngFor="let log of logs">
+    {{log}}
+</div>

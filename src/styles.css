@@ -1,1 +1,33 @@
-/* You can add global styles to this file, and also import other style files */
+.flex-container-vertical {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    background-color: rgba(255, 155, 61, 0.548);
+    text-align: center;
+}
+
+.flex-container-vertical > div {
+    text-align: center;
+    background-color: #72860057;
+    margin: 10px;
+    padding: 20px;
+    font-size: 15px;
+}
+
+.flex-container-horizontal {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    background-color: DodgerBlue;
+    justify-content: space-between;
+    text-align: center;
+}
+
+.flex-container-horizontal > div {
+    text-align: center;
+    background-color: #f1f1f1;
+    margin: 10px;
+    padding: 20px;
+    font-size: 15px;
+}

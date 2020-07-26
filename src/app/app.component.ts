@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Person } from './Person';
+import { PersonService } from './person.service';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +9,8 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'homework';
+  heroes: Person[];
+  // constructor(personService: PersonService) {
+  //   this.heroes = personService.getHeroes();
+  // }
 }
