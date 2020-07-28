@@ -1,91 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Person, CharacterProperties } from './Person';
 import { MessagesService } from './messages.service';
-
-
-
-
-
-
-class Bard extends Person {
-  async SpecialAttack(target: CharacterProperties[]): Promise<any> {
-        target[0].isAsleep = true;
-        await this.msgService.addLog(`Bard ${this.name} uśpił swą niezwykle nieurodziwą pieśnią ${target[0].name}.`);
-    }
-    constructor(public msgService: MessagesService, public name: string, public maxAttackStat: number, public defStat: number,
-                public maxHp: number, public imgLink: string) {
-      super(msgService, name, maxAttackStat, defStat, maxHp, imgLink);
-      this.specialAttackChance = 3;
-    }
-  }
-export class Cleric extends Person {
-    async SpecialAttack(target: CharacterProperties[]): Promise<any> {
-        for (const hero of target)
-        {
-            const healigPower = 3;
-            hero.hpStat += healigPower;
-            if (hero.hpStat > hero.maxHp)
-            {
-                hero.hpStat = hero.maxHp;
-            }
-            await this.msgService.addLog(`Kapłan ${this.name} uleczył ${hero.name} i podniósł jego hp do ${hero.hpStat}.`);
-        }
-    }
-    constructor(public msgService: MessagesService, public name: string, public maxAttackStat: number, public defStat: number,
-                public maxHp: number, public imgLink: string) {
-super(msgService, name, maxAttackStat, defStat, maxHp, imgLink);
-this.specialAttackChance = 2;
-    }
-  }
-class Mage extends Person {
-  async SpecialAttack(target: CharacterProperties[]): Promise<any> {
-        const mageDefDebuffPower = 1;
-        target[0].defStat -= mageDefDebuffPower;
-        if (target[0].defStat <= 0)
-            {
-                target[0].defStat = 0;
-            }
-        await this.msgService.addLog(`Szaman ${this.name} obłupał łuski ${target[0].name} i obniżył jego zdolność obrony do ${target[0].defStat}.`);
-    }
-    constructor(public msgService: MessagesService, public name: string, public maxAttackStat: number, public defStat: number,
-                public maxHp: number, public imgLink: string) {
-super(msgService, name, maxAttackStat, defStat, maxHp, imgLink);
-this.specialAttackChance = 1;
-    }
-  }
-class Warrior extends Person {
-  getEasterEgg(){
-    let audio = new Audio();
-    audio.src='https://www.myinstants.com/media/sounds/szkoda-gadac.mp3';
-    audio.load();
-    audio.play();
-  }
-  async SpecialAttack(target: CharacterProperties[]): Promise<any> {
-        await this.msgService.addLog(`Wojownik ${this.name} stosuje tajne sztuki Muminków-Ninja i atakuje ${target[0].name} dwukrotnie!`);
-        this.getEasterEgg();
-        await this.Attack(target[0]);
-        await this.Attack(target[0]);
-        }
-    constructor(public msgService: MessagesService, public name: string, public maxAttackStat: number, public defStat: number,
-                public maxHp: number, public imgLink: string) {
-super(msgService, name, maxAttackStat, defStat, maxHp, imgLink);
-this.specialAttackChance = 5;
-    }
-  }
-export class Smog extends Person {
-  async SpecialAttack(target: CharacterProperties[]): Promise<any>{
-        await this.msgService.addLog('SMOG ZIEJE PM10 i CO2!');
-        for (const hero of target)
-        {
-            await this.Attack(hero);
-        }
-    }
-    constructor(public msgService: MessagesService, public name: string, public maxAttackStat: number, public defStat: number,
-                public maxHp: number, public imgLink: string) {
-super(msgService, name, maxAttackStat, defStat, maxHp, imgLink);
-this.specialAttackChance = 4;
-    }
-  }
+import { Smog } from './smog';
+import { Bard } from './bard';
+import { Cleric } from './cleric';
+import { Warrior } from './warrior';
+import { Mage } from './mage';
 
 @Injectable({
     providedIn: 'root'
@@ -101,7 +21,8 @@ export class PersonService {
     monster = [new Smog(this.messagesService, 'SMOOOG KRAKOWSKI', 7, 4, 233, 'https://malopolskatogo.pl/content/uploads/2018/07/smok-1920x2560.jpg')];
 
  getHeroes(): Person[] {
-    return this.heroes;
+   this.heroes = this.heroes;
+   return this.heroes;
   }
  getMonster(): Person[]{
    return this.monster;

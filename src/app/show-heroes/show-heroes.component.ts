@@ -17,7 +17,7 @@ export class ShowHeroesComponent implements OnInit {
   constructor(public personService: PersonService) { }
 
   ngOnInit(): void {
-    this.heroes = this.personService.getHeroes();
+    this.heroes = this.personService.heroes;
   }
 
 }

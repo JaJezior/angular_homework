@@ -10,11 +10,14 @@ export class ShowGameComponent implements OnInit {
 
 @Input()
 logs: string[];
+@Input()
+logDelay: number;
 
   constructor(public messagesService: MessagesService) { }
 
   ngOnInit(): void {
     this.logs = this.messagesService.logs;
+    this.logDelay = this.messagesService.logDelay;
   }
 
 }

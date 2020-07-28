@@ -1,5 +1,6 @@
 <p>show-gamelog works!</p>
 <button type="button" [disabled]="gameStarted" (click)="gameStart(); gameStarted = true">Rozpocznij walkę</button>
+Log Delay, ale nie działa jego zmienianie, nie wiem czemu :( <input type="number" [(ngModel)]="logDelay"/>
 <div *ngFor="let log of logs">
     {{log}}
 </div>
