@@ -2,7 +2,14 @@ import { Person, CharacterProperties } from './Person';
 import { MessagesService } from './messages.service';
 
 export class Cleric extends Person {
+    specialAttackSound(){
+        const audio = new Audio();
+        audio.src = 'https://www.myinstants.com/media/sounds/wiedz.mp3';
+        audio.load();
+        audio.play();
+      }
     async SpecialAttack(target: CharacterProperties[]): Promise<any> {
+        this.specialAttackSound();
         for (const hero of target)
         {
             const healigPower = 3;

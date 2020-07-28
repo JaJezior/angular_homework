@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
 export class MessagesService {
   
   public logs: string[] = [];
-  public logDelay = 100;
+  public logDelay = 5000; // jak tutaj tego nie ustawię, to będzie bez delaya, nawet jak ustawię to w inpucie.
 
   
   public async addLog(message: string)  {
