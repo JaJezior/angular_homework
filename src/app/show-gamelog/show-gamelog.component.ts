@@ -23,7 +23,7 @@ export class ShowGamelogComponent implements OnInit {
   logDelay: number;
   @Input()
   logs: string[];
-  
+
  gameStarted = false;
 
 
@@ -37,8 +37,8 @@ export class ShowGamelogComponent implements OnInit {
     await this.msgService.resetLog();
   }
 
-  var heroes = this.personService.getHeroes();
-  var monster = this.personService.getMonster();
+  let heroes = this.personService.getHeroes();
+  let monster = this.personService.getMonster();
   this.resetCharactersStats(heroes, monster);
   this.msgService.addLog(`Nawiązano walkę z ${monster[0].name}`);
   this.game(heroes, monster);
@@ -100,12 +100,9 @@ export class ShowGamelogComponent implements OnInit {
             {
                 if (target.hpStat === 0)
                 {
-                  if(target instanceof Warrior){this.warriorDeath();}
-                  if(target instanceof Cleric){this.clericDeath();}
-                  if(target instanceof Mage){this.mageDeath();}
-                  if(target instanceof Bard){this.bardDeath();}
-                await this.msgService.addLog(`${target.name} zginął marnie`);
-                heroes = heroes.filter(function(hero){return hero !== target; } );
+                  target.PlaySound(target.deathSoundLink);
+                  await this.msgService.addLog(`${target.name} zginął marnie`);
+                  heroes = heroes.filter(function(hero){return hero !== target; } );
                 }
             }
           }
@@ -114,14 +111,14 @@ export class ShowGamelogComponent implements OnInit {
        if (heroes.length === 0)
        {
          this.teamDeath();
-          await this.msgService.addLog('Gra skończona, drużyna umarła. Cała.');
-          await this.msgService.addLog(`${monster[0].name} - postaci pozostało ${monster[0].hpStat} hp`);
-          this.gameStarted = false;
-          return;
+         await this.msgService.addLog('Gra skończona, drużyna umarła. Cała.');
+         await this.msgService.addLog(`${monster[0].name} - postaci pozostało ${monster[0].hpStat} hp`);
+         this.gameStarted = false;
+         return;
        }
        if (monster[0].hpStat <= 0)
        {
-         this.monsterDeath();
+          monster[0].PlaySound(monster[0].deathSoundLink);
           await this.msgService.addLog('Gra skończona, SMOG został pokonany');
 
           for (const hero of heroes)
@@ -140,39 +137,9 @@ export class ShowGamelogComponent implements OnInit {
   audio.load();
   audio.play();
 }
-warriorDeath(){
-  const audio = new Audio();
-  audio.src = 'https://www.myinstants.com/media/sounds/szkoda-gadac.mp3';
-  audio.load();
-  audio.play();
-}
-clericDeath(){
-  const audio = new Audio();
-  audio.src = 'https://www.myinstants.com/media/sounds/co_to_kurwa_jest.mp3';
-  audio.load();
-  audio.play();
-}
-mageDeath(){
-  const audio = new Audio();
-  audio.src = 'https://www.myinstants.com/media/sounds/daj-po-rowno.mp3';
-  audio.load();
-  audio.play();
-}
-bardDeath(){
-  const audio = new Audio();
-  audio.src = 'https://www.myinstants.com/media/sounds/pieknie-kurwa-pieknie.mp3';
-  audio.load();
-  audio.play();
-}
 teamDeath(){
   const audio = new Audio();
   audio.src = 'https://www.myinstants.com/media/sounds/meme-de-creditos-finales.mp3';
-  audio.load();
-  audio.play();
-}
-monsterDeath(){
-  const audio = new Audio();
-  audio.src = 'https://www.myinstants.com/media/sounds/undertale-megalovania-mp3cut.mp3';
   audio.load();
   audio.play();
 }

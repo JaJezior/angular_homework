@@ -10,8 +10,11 @@ export interface CharacterProperties {
     specialAttackChance: number;
     isAsleep: boolean;
     imgLink: string;
+    deathSoundLink: string;
+    specialAttackSoundLink: string;
     Attack(oponent: CharacterProperties): void;
     SpecialAttack(target: CharacterProperties[]): void;
+    PlaySound(soundLink: string): void;
  }
 
 export abstract class Person implements CharacterProperties {
@@ -19,11 +22,18 @@ export abstract class Person implements CharacterProperties {
     public hpStat;
     public specialAttackChance;
     constructor(public msgService: MessagesService, public name: string, public maxAttackStat: number,
-                public defStat: number, public maxHp: number, public imgLink: string){
+                public defStat: number, public maxHp: number, public imgLink: string, public deathSoundLink: string, public specialAttackSoundLink: string){
         this.hpStat = maxHp;
 
     }
     abstract SpecialAttack(target: Person[]): void;
+
+    PlaySound(soundLink: string){
+      const audio = new Audio();
+      audio.src = soundLink;
+      audio.load();
+      audio.play();
+    }
 
     async Attack(oponent: CharacterProperties): Promise<any> {
        let damage = Math.floor( Math.random() * this.maxAttackStat) + 1 - oponent.defStat;
